@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="110" fill="#FFFFFF"/>
+  <!-- Female ring — orange -->
+  <circle cx="192" cy="230" r="112" fill="none" stroke="#E8541A" stroke-width="44"/>
+  <line x1="192" y1="342" x2="192" y2="446" stroke="#E8541A" stroke-width="44" stroke-linecap="round"/>
+  <line x1="148" y1="410" x2="236" y2="410" stroke="#E8541A" stroke-width="44" stroke-linecap="round"/>
+  <!-- Male ring — slate -->
+  <circle cx="336" cy="230" r="112" fill="none" stroke="#465879" stroke-width="44"/>
+  <line x1="415" y1="152" x2="484" y2="84" stroke="#465879" stroke-width="44" stroke-linecap="round"/>
+  <line x1="484" y1="84" x2="430" y2="84" stroke="#465879" stroke-width="44" stroke-linecap="round"/>
+  <line x1="484" y1="84" x2="484" y2="138" stroke="#465879" stroke-width="44" stroke-linecap="round"/>
+</svg>

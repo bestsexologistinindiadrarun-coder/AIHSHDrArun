@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 480" role="img" aria-labelledby="logo-title">
+  <title id="logo-title">Advanced Institute of Hormonal and Sexual Health</title>
+
+  <!-- Female symbol — orange left ring -->
+  <circle cx="170" cy="200" r="108" fill="none" stroke="#E8541A" stroke-width="32"/>
+  <!-- Female cross — vertical -->
+  <line x1="170" y1="308" x2="170" y2="428" stroke="#E8541A" stroke-width="32" stroke-linecap="round"/>
+  <!-- Female cross — horizontal bar -->
+  <line x1="126" y1="384" x2="214" y2="384" stroke="#E8541A" stroke-width="32" stroke-linecap="round"/>
+
+  <!-- Male symbol — slate right ring -->
+  <circle cx="316" cy="200" r="108" fill="none" stroke="#465879" stroke-width="32"/>
+  <!-- Male arrow — diagonal shaft -->
+  <line x1="394" y1="124" x2="476" y2="44" stroke="#465879" stroke-width="32" stroke-linecap="round"/>
+  <!-- Male arrowhead — horizontal -->
+  <line x1="476" y1="44" x2="422" y2="44" stroke="#465879" stroke-width="32" stroke-linecap="round"/>
+  <!-- Male arrowhead — vertical -->
+  <line x1="476" y1="44" x2="476" y2="98" stroke="#465879" stroke-width="32" stroke-linecap="round"/>
+</svg>
