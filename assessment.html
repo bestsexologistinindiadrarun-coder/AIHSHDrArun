@@ -55,6 +55,6 @@ function checkAppointment(){const dateStr=document.getElementById("preferredDate
 function sendAppointmentWhatsApp(){if(!latestAppointmentText){alert("Please confirm an appointment slot first.");return}if(typeof window.trackArunWhatsAppContact==="function")window.trackArunWhatsAppContact();window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(latestAppointmentText)}`,"_blank","noopener,noreferrer")}
 function init(){renderSelectQuestions("iiefQuestions",iiefQuestions);renderSelectQuestions("pedtQuestions",pedtQuestions);const tomorrow=new Date();tomorrow.setDate(tomorrow.getDate()+1);document.getElementById("preferredDate").min=toDateInputValue(new Date());document.getElementById("preferredDate").value=toDateInputValue(tomorrow);document.getElementById("preferredTime").value="10:00"}init();
 </script>
-<script src="main.js"></script>
+<script src="main.js?v=20261001-contact-1"></script>
 </body>
 </html>
