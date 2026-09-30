@@ -210,3 +210,88 @@
   });
 
 })();
+
+/* Google Ads: clinic WhatsApp contact clicks, without patient form data. */
+(function () {
+  'use strict';
+
+  var TAG_ID = 'AW-622603961';
+  var CONTACT_EVENT = 'AW-622603961/WpCCCMrn0IsdELnd8KgC';
+  var host = window.location.hostname.toLowerCase();
+  if (host !== 'drarunkumar.in' && host !== 'www.drarunkumar.in') return;
+  if (window.__drArunContactTrackingInstalled) return;
+  window.__drArunContactTrackingInstalled = true;
+
+  // Keep ad attribution identifiers, but never forward arbitrary query strings.
+  var page = new URL(window.location.href);
+  var measurementPage = new URL(page.origin + page.pathname);
+  ['gclid', 'gbraid', 'wbraid'].forEach(function (key) {
+    var value = page.searchParams.get(key);
+    if (value) measurementPage.searchParams.set(key, value);
+  });
+  var measurementReferrer = '';
+  if (document.referrer) {
+    try {
+      var referrer = new URL(document.referrer);
+      measurementReferrer = referrer.origin + referrer.pathname;
+    } catch (_) {}
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  if (typeof window.gtag !== 'function') {
+    window.gtag = function () { window.dataLayer.push(arguments); };
+  }
+  // Disable remarketing before initializing the Google tag.
+  window.gtag('set', 'allow_ad_personalization_signals', false);
+  window.gtag('js', new Date());
+  window.gtag('config', TAG_ID, {
+    send_page_view: false,
+    allow_ad_personalization_signals: false,
+    page_location: measurementPage.href,
+    page_referrer: measurementReferrer,
+    page_title: 'Dr Arun Kumar | Clinic contact'
+  });
+
+  if (!document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js"]')) {
+    var loader = document.createElement('script');
+    loader.async = true;
+    loader.src = 'https://www.googletagmanager.com/gtag/js?id=' + TAG_ID;
+    document.head.appendChild(loader);
+  }
+
+  // Called only after the existing assessment/appointment validation succeeds.
+  // Takes no form fields, questionnaire answers, or WhatsApp message text.
+  window.trackArunWhatsAppContact = function () {
+    try {
+      window.gtag('event', 'conversion', {
+        send_to: CONTACT_EVENT,
+        value: 0,
+        currency: 'INR',
+        allow_ad_personalization_signals: false,
+        page_location: measurementPage.href,
+        page_referrer: measurementReferrer,
+        page_title: 'Dr Arun Kumar | Clinic contact'
+      });
+    } catch (_) {
+      // A blocked or failed measurement tag must never prevent contacting the clinic.
+    }
+  };
+
+  document.addEventListener('click', function (event) {
+    if (!event.isTrusted || !(event.target instanceof Element)) return;
+    var link = event.target.closest('a[href]');
+    if (!link) return;
+    var destination;
+    try {
+      destination = new URL(link.href, window.location.href);
+    } catch (_) {
+      return;
+    }
+    if (destination.protocol !== 'https:' ||
+        destination.hostname !== 'wa.me' ||
+        destination.pathname !== '/919927005959') return;
+
+    window.trackArunWhatsAppContact();
+    // Preserve the original link navigation and new-tab behavior.
+  }, true);
+})();
