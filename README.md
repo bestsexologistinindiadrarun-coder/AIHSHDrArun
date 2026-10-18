@@ -21,8 +21,9 @@ has a real WhatsApp link rather than a decorative CSS pseudo-element.
 
 The existing appointment selector checks published hours only. It has no booking
 backend. Its wording now describes a **request requiring clinic confirmation**,
-not real-time slot availability. Assessment scoring and existing listed hours
-have not been changed.
+not real-time slot availability. The owner confirmed consultation hours of
+6:00 AM–8:00 PM IST on 18 October 2026. Displayed hours and the appointment
+selector use this window. Assessment scoring has not been changed.
 
 ## Contact measurement
 
@@ -64,9 +65,9 @@ test rendering, mobile browsers, Google's backend or appointment availability.
 
 ## Required release review
 
-1. Verify the real current clinic hours, fee, credentials and address. New pages
-   ask visitors to confirm hours and fees, rather than inventing them. Older
-   pages retain their prior `10 AM–2 PM / 5 PM–8 PM` hours pending confirmation.
+1. Consultation hours are confirmed by the owner as 6:00 AM–8:00 PM IST.
+   Verify the fee, credentials and address. Pages ask visitors to confirm
+   their appointment time and fee with the clinic before travelling.
 2. Review Hindi/English copy and relevant healthcare-advertising requirements.
    No ranking, cure, qualification or patient-volume guarantees were added.
 3. Preview the branch locally or through the existing authorized hosting workflow.
