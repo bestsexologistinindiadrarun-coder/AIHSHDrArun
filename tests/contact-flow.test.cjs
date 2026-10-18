@@ -82,7 +82,7 @@ test('real mobile-menu WhatsApp link and three correct clinic contact actions', 
   assert.equal(bar.children.length, 3);
   assert.equal(bar.children[0].href, 'tel:+919927005959');
   assert.equal(bar.children[1].href, 'https://wa.me/919927005959');
-  assert.match(new URL(bar.children[2].href).searchParams.get('destination'), /Sikandra-Bodla Road, Agra/);
+  assert.equal(bar.children[2].href, 'https://maps.app.goo.gl/KXKvnoKUAVTJcy5v9?g_st=ac');
 });
 
 test('initialization does not report a conversion or contact interaction', () => {
@@ -104,7 +104,7 @@ test('one trusted WhatsApp click reports one existing contact conversion', () =>
 test('phone and directions produce neutral hooks, not appointment conversions', () => {
   const env = setup();
   assert.equal(env.click('tel:+919927005959').defaultPrevented, false);
-  env.click('https://www.google.com/maps/dir/?api=1&destination=Agra');
+  env.click('https://maps.app.goo.gl/KXKvnoKUAVTJcy5v9?g_st=ac');
   assert.equal(env.conversions().length, 0);
   assert.deepEqual(Array.from(env.interactions(), item => item.contact_method), ['phone', 'directions']);
 });

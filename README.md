@@ -73,8 +73,8 @@ test rendering, mobile browsers, Google's backend or appointment availability.
 3. Preview the branch locally or through the existing authorized hosting workflow.
    Test 320px, 390px, 768px and desktop widths, keyboard navigation, the menu,
    sticky bar, FAQs and contact links. Confirm mobile content is not covered.
-4. Verify that Google Maps resolves to this exact clinic, not another similarly
-   named business. Directions currently use the full clinic name/address query.
+4. Directions use the owner-provided Google Maps link:
+   `https://maps.app.goo.gl/KXKvnoKUAVTJcy5v9?g_st=ac`. Verify the Maps handoff on a phone.
 5. Approve and merge through the existing deployment workflow. Do not change
    Google Ads URLs before the corresponding HTTPS pages return successfully.
 6. After release, use Tag Assistant to verify one contact conversion per click,

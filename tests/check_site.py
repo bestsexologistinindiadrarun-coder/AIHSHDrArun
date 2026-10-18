@@ -84,7 +84,7 @@ for name, document in documents.items():
             errors.append(f"{name}: missing local target {url}")
         if parsed.fragment and target_name in documents and parsed.fragment not in documents[target_name].ids:
             errors.append(f"{name}: missing fragment {url}")
-    if "main.js?v=20261018-contact-2" not in document.urls:
+    if "main.js?v=20261018-directions-3" not in document.urls:
         errors.append(f"{name}: outdated shared script version")
     if "styles.css?v=20261018-contact-2" not in document.urls:
         errors.append(f"{name}: outdated shared stylesheet version")
@@ -93,7 +93,7 @@ for name, document in documents.items():
             errors.append(f"{name}: missing correct call action")
         if not any(url.startswith("https://wa.me/919927005959") for url in document.urls):
             errors.append(f"{name}: missing correct WhatsApp action")
-        if not any(url.startswith("https://www.google.com/maps/dir/") for url in document.urls):
+        if "https://maps.app.goo.gl/KXKvnoKUAVTJcy5v9?g_st=ac" not in document.urls:
             errors.append(f"{name}: missing directions")
         canonical = [attrs.get("href") for tag, attrs in document.tags if tag == "link" and attrs.get("rel") == "canonical"]
         if canonical != ["https://www.drarunkumar.in/" + name]:

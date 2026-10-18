@@ -86,7 +86,7 @@
     const links = [
       ['Call', 'tel:+919927005959', 'Call Dr. Arun Kumar\'s Agra clinic on 9927005959'],
       ['WhatsApp', 'https://wa.me/919927005959', 'Request an appointment on WhatsApp'],
-      ['Directions', 'https://www.google.com/maps/dir/?api=1&destination=Advanced%20Institute%20of%20Hormonal%20and%20Sexual%20Health%2C%2012%20UGF%2C%20Sikandra-Bodla%20Road%2C%20Agra', 'Open directions to the Agra clinic in Google Maps']
+      ['Directions', 'https://maps.app.goo.gl/KXKvnoKUAVTJcy5v9?g_st=ac', 'Open directions to the Agra clinic in Google Maps']
     ];
     links.forEach(function (item) {
       const link = document.createElement('a');
@@ -339,8 +339,8 @@
                destination.pathname.replace(/[\s()-]/g, '') === '+919927005959') {
       recordContactInteraction('phone');
     } else if (destination.protocol === 'https:' &&
-               destination.hostname === 'www.google.com' &&
-               destination.pathname === '/maps/dir/') {
+               destination.hostname === 'maps.app.goo.gl' &&
+               destination.pathname === '/KXKvnoKUAVTJcy5v9') {
       recordContactInteraction('directions');
     }
     // Preserve the original link navigation and new-tab behavior.
