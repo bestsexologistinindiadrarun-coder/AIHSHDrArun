@@ -24,6 +24,17 @@
   const mainNav = document.querySelector('.main-nav');
 
   if (navWrap && mainNav) {
+    // A CSS pseudo-element cannot be clicked or focused. Use a real link.
+    if (!mainNav.querySelector('.mobile-contact-link')) {
+      const mobileContact = document.createElement('a');
+      mobileContact.className = 'mobile-contact-link';
+      mobileContact.href = 'https://wa.me/919927005959';
+      mobileContact.target = '_blank';
+      mobileContact.rel = 'noopener noreferrer';
+      mobileContact.textContent = 'WhatsApp +91 99270 05959';
+      mainNav.appendChild(mobileContact);
+    }
+
     const toggle = document.createElement('button');
     toggle.className = 'nav-toggle';
     toggle.setAttribute('aria-label', 'Open navigation menu');
@@ -65,6 +76,31 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeNav();
     });
+  }
+
+  /* ── MOBILE: persistent, accessible clinic contact links ──── */
+  if (!document.querySelector('.clinic-contact-bar')) {
+    const contactBar = document.createElement('nav');
+    contactBar.className = 'clinic-contact-bar';
+    contactBar.setAttribute('aria-label', 'Contact the Agra clinic');
+    const links = [
+      ['Call', 'tel:+919927005959', 'Call Dr. Arun Kumar\'s Agra clinic on 9927005959'],
+      ['WhatsApp', 'https://wa.me/919927005959', 'Request an appointment on WhatsApp'],
+      ['Directions', 'https://www.google.com/maps/dir/?api=1&destination=Advanced%20Institute%20of%20Hormonal%20and%20Sexual%20Health%2C%2012%20UGF%2C%20Sikandra-Bodla%20Road%2C%20Agra', 'Open directions to the Agra clinic in Google Maps']
+    ];
+    links.forEach(function (item) {
+      const link = document.createElement('a');
+      link.textContent = item[0];
+      link.href = item[1];
+      link.setAttribute('aria-label', item[2]);
+      if (item[1].startsWith('https:')) {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      }
+      contactBar.appendChild(link);
+    });
+    document.body.appendChild(contactBar);
+    document.body.classList.add('has-clinic-contact-bar');
   }
 
   /* ── NAV: Scroll-aware shrink + shadow ─────────────────────── */
@@ -222,9 +258,10 @@
   if (window.__drArunContactTrackingInstalled) return;
   window.__drArunContactTrackingInstalled = true;
 
-  // Keep ad attribution identifiers, but never forward arbitrary query strings.
+  // Keep ad attribution identifiers, but do not send condition-specific paths,
+  // form values, questionnaire answers, hashes or arbitrary query strings.
   var page = new URL(window.location.href);
-  var measurementPage = new URL(page.origin + page.pathname);
+  var measurementPage = new URL(page.origin + '/');
   ['gclid', 'gbraid', 'wbraid'].forEach(function (key) {
     var value = page.searchParams.get(key);
     if (value) measurementPage.searchParams.set(key, value);
@@ -233,7 +270,7 @@
   if (document.referrer) {
     try {
       var referrer = new URL(document.referrer);
-      measurementReferrer = referrer.origin + referrer.pathname;
+      measurementReferrer = referrer.origin;
     } catch (_) {}
   }
 
@@ -259,10 +296,17 @@
     document.head.appendChild(loader);
   }
 
-  // Called only after the existing assessment/appointment validation succeeds.
+  // Called on a contact click or after the assessment/request validation succeeds.
   // Takes no form fields, questionnaire answers, or WhatsApp message text.
+  // This is a contact attempt, NOT a delivered message or confirmed appointment.
+  function recordContactInteraction(method) {
+    // Neutral data-layer hooks only. Phone/directions have no Ads conversion ID.
+    window.dataLayer.push({ event: 'arun_clinic_contact', contact_method: method });
+  }
+
   window.trackArunWhatsAppContact = function () {
     try {
+      recordContactInteraction('whatsapp');
       window.gtag('event', 'conversion', {
         send_to: CONTACT_EVENT,
         value: 0,
@@ -287,11 +331,18 @@
     } catch (_) {
       return;
     }
-    if (destination.protocol !== 'https:' ||
-        destination.hostname !== 'wa.me' ||
-        destination.pathname !== '/919927005959') return;
-
-    window.trackArunWhatsAppContact();
+    if (destination.protocol === 'https:' &&
+        destination.hostname === 'wa.me' &&
+        destination.pathname === '/919927005959') {
+      window.trackArunWhatsAppContact();
+    } else if (destination.protocol === 'tel:' &&
+               destination.pathname.replace(/[\s()-]/g, '') === '+919927005959') {
+      recordContactInteraction('phone');
+    } else if (destination.protocol === 'https:' &&
+               destination.hostname === 'www.google.com' &&
+               destination.pathname === '/maps/dir/') {
+      recordContactInteraction('directions');
+    }
     // Preserve the original link navigation and new-tab behavior.
   }, true);
 })();
