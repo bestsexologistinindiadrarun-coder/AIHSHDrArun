@@ -1,0 +1,74 @@
+/* Focused consultation pages. Reuses the existing institute logo and palette. */
+.consultation-page { background: #fff; }
+.consultation-page .container { max-width: 1180px; }
+.consultation-page main { overflow-wrap: anywhere; }
+.consultation-page section { padding: 64px 0; }
+.consultation-page h1,
+.consultation-page h2,
+.consultation-page h3 { font-family: var(--font-sans); }
+.consultation-page h1 { font-size: clamp(32px, 4.8vw, 56px); line-height: 1.12; max-width: 760px; }
+.consultation-page h1 span { color: #b63c0b; }
+.consultation-page h2 { font-size: clamp(24px, 3vw, 34px); margin-bottom: 18px; }
+.consultation-page h3 { font-size: 20px; margin-bottom: 12px; }
+.consultation-page p + p { margin-top: 14px; }
+.consultation-page .btn { min-height: 48px; white-space: normal; text-align: center; }
+.consultation-page .btn.green { background: #b63c0b; }
+.consultation-page .btn.green:hover { background: #913009; }
+.consultation-page a:focus-visible,
+.consultation-page summary:focus-visible { outline: 3px solid #b63c0b; outline-offset: 4px; }
+.skip-link { position: fixed; top: 8px; left: 12px; z-index: 1000; padding: 12px 18px; background: #fff; color: #0b1222; transform: translateY(-160%); }
+.skip-link:focus { transform: none; }
+.consultation-hero { background: linear-gradient(125deg, #fff 50%, #fef0e8); border-bottom: 1px solid var(--line); }
+.consultation-kicker { color: #994019; font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 18px; }
+.consultation-layout { display: grid; grid-template-columns: 1.35fr 1fr; gap: 52px; align-items: start; }
+.consultation-intro { font-size: 18px; color: var(--ink-mid); max-width: 650px; margin: 22px 0 16px; }
+.consultation-hindi { color: var(--navy); font-size: 19px; line-height: 1.8; }
+.consultation-page .actions { flex-wrap: wrap; margin-top: 24px; }
+.consultation-note { color: var(--muted); font-size: 14px; margin-top: 16px; }
+.consultation-note a { text-decoration: underline; text-underline-offset: 3px; }
+.visit-card { background: #fff; border: 1px solid var(--line); border-top: 4px solid #b63c0b; border-radius: 12px; padding: 28px; box-shadow: var(--shadow-sm); }
+.visit-card h2 { font-size: 24px; margin-bottom: 6px; }
+.visit-card .credentials { font-weight: 600; color: var(--muted); font-size: 14px; }
+.visit-card address { font-style: normal; margin: 22px 0; padding: 20px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.visit-card .btn { width: 100%; }
+.consultation-facts { display: flex; flex-wrap: wrap; gap: 12px 24px; border-top: 1px solid var(--line); margin-top: 32px; padding-top: 20px; font-size: 14px; color: var(--navy); font-weight: 600; }
+.consultation-facts span::before { content: '\2713'; color: #994019; margin-right: 7px; }
+.consultation-split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+.consultation-list { list-style: disc; padding-left: 22px; }
+.consultation-list li { padding: 5px 0 5px 4px; }
+.consultation-list a { text-decoration: underline; text-underline-offset: 4px; }
+.consultation-steps { counter-reset: visit; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 30px; }
+.consultation-step { border-top: 1px solid var(--line-strong); padding-top: 22px; }
+.consultation-step::before { counter-increment: visit; content: '0' counter(visit); display: block; color: #994019; font-weight: 700; font-size: 14px; margin-bottom: 12px; }
+.consultation-band { background: var(--surface); }
+.consultation-faq { max-width: 840px; }
+.consultation-faq details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+.consultation-faq summary { cursor: pointer; font-weight: 650; color: var(--navy); padding-right: 16px; }
+.consultation-faq details p { margin-top: 12px; color: var(--muted); }
+.consultation-cta { border-top: 1px solid var(--line); background: #fef0e8; }
+.consultation-cta .container { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.consultation-cta .actions { margin-top: 0; flex-shrink: 0; }
+.consultation-cta h2 { margin-bottom: 8px; }
+.consultation-privacy { border-top: 1px solid var(--line); padding-top: 18px; }
+.consultation-page .footer { padding: 32px 0; }
+.consultation-page .footer a { text-decoration: underline; text-underline-offset: 3px; }
+.consultation-page .footer-links { display: flex; flex-wrap: wrap; gap: 12px 22px; margin-bottom: 20px; }
+.consultation-page .source-note { font-size: 13px; color: var(--muted); margin-top: 22px; }
+.consultation-page .source-note a { text-decoration: underline; }
+@media (max-width: 900px) {
+  .consultation-layout { grid-template-columns: 1fr; gap: 30px; }
+  .consultation-split { grid-template-columns: 1fr; gap: 30px; }
+  .consultation-steps { gap: 22px; }
+  .consultation-cta .container { display: block; }
+  .consultation-cta .actions { margin-top: 24px; }
+}
+@media (max-width: 620px) {
+  .consultation-page section { padding: 40px 0; }
+  .consultation-page .consultation-hero { padding-top: 32px; }
+  .consultation-kicker { font-size: 12px; letter-spacing: .04em; }
+  .consultation-intro { font-size: 17px; }
+  .consultation-hindi { font-size: 18px; }
+  .consultation-steps { grid-template-columns: 1fr; }
+  .visit-card { padding: 22px; }
+  .consultation-facts { gap: 10px 18px; }
+}

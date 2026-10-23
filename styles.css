@@ -1197,9 +1197,8 @@ input[disabled] {
     font-weight: 600;
   }
 
-  /* Add WhatsApp CTA at bottom of mobile menu */
-  .main-nav::after {
-    content: 'WhatsApp +91 99270 05959';
+  /* Real, keyboard-accessible link added by main.js. */
+  .main-nav .mobile-contact-link {
     display: block;
     text-align: center;
     margin-top: 12px;
@@ -1210,7 +1209,6 @@ input[disabled] {
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.01em;
-    cursor: pointer;
   }
 
   .hero { padding: 52px 0 44px; }
@@ -1224,6 +1222,33 @@ input[disabled] {
   section { padding: 60px 0; }
 
   .footer-grid { grid-template-columns: 1fr; gap: 18px; }
+}
+
+/* Persistent contact actions. Keep content above the mobile safe area. */
+.main-nav .mobile-contact-link { display: none; }
+.clinic-contact-bar { display: none; }
+.clinic-contact-bar a:focus-visible,
+.mobile-contact-link:focus-visible { outline: 3px solid #0b1222; outline-offset: -4px; }
+@media (max-width: 900px) {
+  .main-nav .mobile-contact-link { display: block; }
+  body.has-clinic-contact-bar { padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px)); }
+  .clinic-contact-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 210;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    padding: 10px max(10px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(10px, env(safe-area-inset-left, 0px));
+    border-top: 1px solid var(--line-strong);
+    background: #fff;
+    box-shadow: 0 -4px 18px rgba(11, 30, 62, .08);
+  }
+  .clinic-contact-bar a { display: flex; align-items: center; justify-content: center; min-height: 48px; border: 1px solid var(--line-strong); border-radius: 8px; color: #24364f; font-size: 14px; font-weight: 700; text-align: center; }
+  .clinic-contact-bar a:first-child { color: #fff; background: #b63c0b; border-color: #b63c0b; }
+  body.nav-open .clinic-contact-bar { display: none; }
 }
 
 /* ── RESPONSIVE — SMALL MOBILE / < 620px ────────────────────── */
@@ -1502,4 +1527,18 @@ input[disabled] {
   .clinic-stack { grid-template-columns: 1fr 1fr; }
   .clinic-img--primary { height: 300px; }
   .clinic-stack .clinic-img { height: 175px; }
+}
+
+/* Keep these overrides after the legacy hero breakpoints. */
+.hero-copy .consultation-note { font-size: 14px; color: var(--muted); margin-top: 16px; }
+@media (max-width: 620px) {
+  .hero.hero-banner { min-height: 0; }
+  .hero.hero-banner .hero-canvas,
+  .hero.hero-banner .hero-fade { display: none; }
+  .hero.hero-banner .hero-inner { padding: 36px 20px; min-height: 0; }
+  .hero.hero-banner .hero-copy { max-width: 100%; }
+  .hero.hero-banner .hero-copy h1 { font-size: clamp(30px, 8vw, 42px); }
+  .hero.hero-banner .hero-copy .lead { font-size: 16px; line-height: 1.7; }
+  .hero.hero-banner .hero-copy .actions .btn { min-height: 48px; font-size: 14px; padding: 12px 16px; }
+  .hero.hero-banner .hero-trust-strip .trust-row { grid-template-columns: repeat(2, 1fr); }
 }
