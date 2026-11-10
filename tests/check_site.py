@@ -7,7 +7,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-LANDINGS = {"sexologist-agra.html", "premature-ejaculation-agra.html", "erectile-dysfunction-agra.html", "contact.html"}
+LANDINGS = {"sexologist-agra.html", "premature-ejaculation-agra.html", "erectile-dysfunction-agra.html", "contact.html", "male-fertility-agra.html"}
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 errors = []
 
@@ -84,9 +84,11 @@ for name, document in documents.items():
             errors.append(f"{name}: missing local target {url}")
         if parsed.fragment and target_name in documents and parsed.fragment not in documents[target_name].ids:
             errors.append(f"{name}: missing fragment {url}")
-    if "main.js?v=20261018-directions-3" not in document.urls:
+    script_version = "20261110-1" if name in LANDINGS or name in {"index.html", "treatments.html"} else "20261018-directions-3"
+    if "main.js?v=" + script_version not in document.urls:
         errors.append(f"{name}: outdated shared script version")
-    if "styles.css?v=20261018-contact-2" not in document.urls:
+    style_version = "20261110-1" if name in {"index.html", "treatments.html"} else "20261018-contact-2"
+    if ("consultation.css?v=20261110-1" if name in LANDINGS else "styles.css?v=" + style_version) not in document.urls:
         errors.append(f"{name}: outdated shared stylesheet version")
     if name in LANDINGS:
         if "tel:+919927005959" not in document.urls:

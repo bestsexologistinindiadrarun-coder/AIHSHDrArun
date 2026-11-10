@@ -3,6 +3,7 @@
    ═══════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
+  document.body.classList.add('js-enabled');
 
   /* ── NAV: Replace brand with institute logo on all pages ───── */
   const brandEl = document.querySelector('.brand');

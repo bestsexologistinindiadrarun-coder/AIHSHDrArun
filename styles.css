@@ -1542,3 +1542,10 @@ input[disabled] {
   .hero.hero-banner .hero-copy .actions .btn { min-height: 48px; font-size: 14px; padding: 12px 16px; }
   .hero.hero-banner .hero-trust-strip .trust-row { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Direct routes from the homepage to the consultation relevant to an enquiry. */
+.skip-link{position:fixed;top:8px;left:12px;z-index:1000;padding:12px 18px;background:#fff;color:#18324f;transform:translateY(-180%)}.skip-link:focus{transform:none}
+.home-hours{font-size:15px;line-height:1.7;color:var(--navy);margin:18px 0}.home-hours strong{font-weight:700}
+.concern-section{padding:48px 0;background:#fff;border-bottom:1px solid var(--line)}.concern-section h2{font-family:var(--font-sans);font-size:30px}.concern-section .eyebrow{margin-bottom:10px}.concern-section .section-heading{margin-bottom:24px}.concern-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.concern{display:flex;flex-direction:column;gap:10px;padding:22px 18px;border:1px solid var(--line);border-radius:8px}.concern:hover{border-color:#b63c0b;background:#fff8f2}.concern-title{display:flex;justify-content:space-between;gap:12px;font-size:17px;line-height:1.4;font-weight:700;color:var(--navy)}.concern-title>span{color:#b63c0b}.concern>span:not(:first-child){font-size:13px;color:var(--muted)}.concern:focus-visible{outline:3px solid #b63c0b;outline-offset:4px}
+@media(max-width:900px){.concern-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.concern-grid{grid-template-columns:1fr}.home-hours{font-size:14px}.concern-section{padding:36px 0}}

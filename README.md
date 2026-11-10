@@ -1,57 +1,32 @@
 # Dr. Arun Kumar website
 
-Static HTML/CSS/JavaScript site for `www.drarunkumar.in`. No framework build or new runtime dependency is required.
+Static HTML, CSS and JavaScript for `https://www.drarunkumar.in/`, published by the existing GitHub Pages workflow from `main`. No framework build is required.
 
-## Proposed consultation-page update, 18 October 2026
+## Consultation pages, 10 November 2026
 
-This branch is for review. It does **not** change Google Ads settings, budgets,
-keywords, conversion-goal status, Business Profiles or the production branch.
-The existing institute logo and image files are unchanged. No generated imagery
-is represented as a photograph of the real clinic.
-
-| Ad-group intent | Proposed destination, after deployment |
+| Patient enquiry | Page |
 | --- | --- |
-| Sexologist Agra / Sexologist Near Me | `/sexologist-agra.html` |
-| Premature Ejaculation Consultation | `/premature-ejaculation-agra.html` |
-| Erectile Function Consultation | `/erectile-dysfunction-agra.html` |
+| Sexologist / Agra clinic | `sexologist-agra.html` |
+| Premature ejaculation / shighrapatan | `premature-ejaculation-agra.html` |
+| Erectile dysfunction | `erectile-dysfunction-agra.html` |
+| Sperm count, motility and male fertility | `male-fertility-agra.html` |
+| Appointments, hours and directions | `contact.html` |
 
-The home and contact pages provide direct contact links. All pages receive a
-mobile Call / WhatsApp / Directions bar through `main.js`. The mobile menu now
-has a real WhatsApp link rather than a decorative CSS pseudo-element.
+These five pages use standalone `consultation.css`, system fonts and the existing institute logo. They have static call, WhatsApp and Maps links, including a mobile contact bar that also works without JavaScript. The main navigation progressively collapses only when JavaScript is active.
 
-The existing appointment selector checks published hours only. It has no booking
-backend. Its wording now describes a **request requiring clinic confirmation**,
-not real-time slot availability. The owner confirmed consultation hours of
-6:00 AM–8:00 PM IST on 18 October 2026. Displayed hours and the appointment
-selector use this window. Assessment scoring has not been changed.
+The homepage links directly to the relevant consultations. Treatment cards no longer require visitors to complete the self-assessment to enquire. The assessment itself and its scoring are unchanged. A sitemap and robots file provide crawl discovery; they do not guarantee indexing or ranking.
+
+Public details are retained from the November 3 production update: centre open 24 hours; Dr. Arun consultations 7 AM–7 PM IST daily. Reception confirms the appointment and fee. Phone and WhatsApp: `9927005959`. Directions retain the owner's link: `https://maps.app.goo.gl/KXKvnoKUAVTJcy5v9?g_st=ac`.
 
 ## Contact measurement
 
-- The existing `AW-622603961/WpCCCMrn0IsdELnd8KgC` WhatsApp contact conversion is
-  preserved. It records a contact attempt, not a sent message or an appointment.
-- A neutral data-layer event `arun_clinic_contact` has `contact_method` equal to
-  `phone`, `whatsapp` or `directions`. Phone and directions hooks are **not**
-  connected to new Google Ads conversion actions. No new primary goals exist.
-- Do not attach a second WhatsApp conversion tag to this hook: the existing
-  conversion is already emitted by the script.
-- Measurement is limited to `drarunkumar.in` and `www.drarunkumar.in`. Localhost,
-  GitHub Pages alternate domains and previews do not load the tag or send events.
-- Payload overrides use the site origin, neutral page title and referrer origin.
-  Condition-specific paths, arbitrary query strings, fragments, names, telephone
-  input values, assessment answers and WhatsApp message text are not included.
-  The existing attribution identifiers `gclid`, `gbraid`, `wbraid` are retained.
-- No enhanced conversions, customer matching or remarketing audiences were added.
-- There is no server-confirmed booking event. A genuine booking/conversation must
-  not be inferred from a click. Configure qualified outcomes separately only when
-  appropriate, supported, privacy-reviewed and validated.
-- This change does not introduce a consent-management platform. Before publishing,
-  review the site's privacy notice, applicable consent requirements and connected
-  Google tag settings. Do not assume that these code changes alone establish
-  legal or Google policy compliance.
+The existing WhatsApp contact action `AW-622603961/WpCCCMrn0IsdELnd8KgC` is preserved. It records a contact click, not a sent message, connected call or confirmed appointment. The script emits no conversion on page load.
 
-## Checks
+The `arun_clinic_contact` data-layer event reports only the contact method (`phone`, `whatsapp`, `directions`). Phone and directions are not mapped to new Google Ads conversion actions. This website update does not change Ads goals, campaigns, budgets or bidding. Google Ads configuration and live attribution need separate verification.
 
-Run from the repository root with Node.js 18+ and Python 3:
+Measurement only runs on `drarunkumar.in` and `www.drarunkumar.in`. Preview domains do not load the tag. Existing payload overrides omit condition-specific paths, arbitrary query strings, form fields, assessment answers and WhatsApp text. Attribution identifiers are retained. No enhanced conversions or remarketing audiences were added.
+
+## Verification and release
 
 ```sh
 node --check main.js
@@ -60,35 +35,14 @@ python3 tests/check_site.py
 git diff --check
 ```
 
-The tests use stubs and local parsing. They do not send conversion requests or
-test rendering, mobile browsers, Google's backend or appointment availability.
+The automated checks cover contact routing, duplicate tags/events, preview isolation, sensitive-field omission, assessment consent, balanced HTML and local links. They do not confirm that a real phone call connected, a message was delivered, or an appointment was booked.
 
-## Required release review
+Review desktop and narrow/mobile layouts, menu opening and Escape dismissal, FAQ expansion, visible focus and the fixed contact bar. After merge, confirm GitHub Pages deployment succeeds and verify the production pages and shared CSS return the updated content. Preserve the existing domain, logo files and other doctors' sites.
 
-1. Consultation hours are confirmed by the owner as 6:00 AM–8:00 PM IST.
-   Verify the fee, credentials and address. Pages ask visitors to confirm
-   their appointment time and fee with the clinic before travelling.
-2. Review Hindi/English copy and relevant healthcare-advertising requirements.
-   No ranking, cure, qualification or patient-volume guarantees were added.
-3. Preview the branch locally or through the existing authorized hosting workflow.
-   Test 320px, 390px, 768px and desktop widths, keyboard navigation, the menu,
-   sticky bar, FAQs and contact links. Confirm mobile content is not covered.
-4. Directions use the owner-provided Google Maps link:
-   `https://maps.app.goo.gl/KXKvnoKUAVTJcy5v9?g_st=ac`. Verify the Maps handoff on a phone.
-5. Approve and merge through the existing deployment workflow. Do not change
-   Google Ads URLs before the corresponding HTTPS pages return successfully.
-6. After release, use Tag Assistant to verify one contact conversion per click,
-   no conversion on page load, no patient fields and no duplicate Google tags.
-   Real calls/WhatsApp handoff and Ads attribution still require live checks.
-7. Update only the relevant Dr. Arun Agra ad URLs after those checks. Preserve
-   other doctors' assets and the existing budget, keywords and campaign settings.
-
-## Content references
+## Patient-information sources
 
 - [NHS: ejaculation problems](https://www.nhs.uk/conditions/ejaculation-problems/)
 - [NHS: erectile dysfunction](https://www.nhs.uk/conditions/erection-problems-erectile-dysfunction/)
-- [Google tag API reference](https://developers.google.com/tag-platform/gtagjs/reference)
-- [Google Ads customer data restrictions](https://support.google.com/google-ads/answer/7475709)
+- [NHS: low sperm count](https://www.nhs.uk/conditions/low-sperm-count/)
 
-These references support general information, not a diagnosis or a claim that
-this clinic has obtained approval for any specific advertisement.
+The pages offer general information and consultation routes, not individual diagnoses, prescriptions or guaranteed outcomes.
